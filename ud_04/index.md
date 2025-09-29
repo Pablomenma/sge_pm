@@ -1,4 +1,5 @@
 # PRÁCTICAS SISTEMAS DE GESTIÓN EMPRESARIAL. PABLO MENDOZA MAYO
-##Unidad 04: Python.
-[Practicas iniciales.] (./pr1)
 
+##Unidad 04: Python.
+
+- [pr_01](././index.md
