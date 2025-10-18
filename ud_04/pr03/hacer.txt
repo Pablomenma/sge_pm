@@ -1,0 +1,7 @@
+Contando elementos: Contar el número de nombres que comienzan con la letra a
+Buscar un elementos: Pregunte al usuario su nombre y le indique si está en la lista, y en caso afirmativo, en qué posición está.
+Primeros elementos: Pregunte al usuario su nombre y le muestre el listado de todos los nombres que se encuentran delante del suyo.
+Obtener número de nombres de una longitud: Pregunte al usuario un número y le diga cuántos nombres hay en la lista con la misma longitud que el número indicado
+Nombres cortos: Muestre todos los nombres cuya longitud sea igual o inferior a 4 caracteres
+Número de vocales: Indique cuántas veces se repite cada una de las vocales entre todos los nombres (ignorando mayúsculas y minúsculas)
+Número de letras: Imprima el número de veces que se repite cada letra del abecedario entre todos los elementos de la lista.

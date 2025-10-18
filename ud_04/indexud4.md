@@ -2,4 +2,5 @@
 
 ##Unidad 04: Python.
 
-- [pr_01](././index.md
+1. [Ejercicios iniciales](./pr_01/iniciales.md)
+2. 

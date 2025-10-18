@@ -1,7 +1,7 @@
 # PRÁCTICAS SISTEMAS DE GESTIÓN EMPRESARIAL. PABLO MENDOZA MAYO
 
 ## Unidad 04: Python.
-### ejercicios ejercicios iniciales. 
+### ejercicios Ejercicios  pr2.
 
 1. [ejercicio 01](./ejer1.py)
 2. [ejercicio 02](./ejer2.py)

@@ -1,14 +1,7 @@
-#Crea un programa que solicite un número por pantalla al usuario y siga pidiéndolo hasta que el usuario introduzca un número válido.inputif ( int valor  input)
-while ( not input ("dime un número: ").isdigit() ):
+#Crea un programa que solicite un número por pantalla al usuario y siga pidiéndolo hasta que el usuario introduzca un número válido.
+entrada = input("Introduce un numero: ")
 
-    print("No es válido")
+while(not entrada.isdigit()):
+    entrada = input("Introduce un numero: ")
 
-print("Has introducido el número" + num)
- 
-
-
-
-
-
-
-
+print("Has introducido un numero")
