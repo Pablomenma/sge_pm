@@ -128,7 +128,7 @@ for c in texto:
 print(salida)
  ```
 
- #### Escribe un programa que transforme una cadena de palabras separadas por espacios o guiones en formato camelCase (la primera letra de cada palabra, excepto la primera, debe ser mayúscula y no debe haber espacios ni guiones)
+#### Escribe un programa que transforme una cadena de palabras separadas por espacios o guiones en formato camelCase (la primera letra de cada palabra, excepto la primera, debe ser mayúscula y no debe haber espacios ni guiones)
 
 ```python
 original = input("escribe un texto:")
@@ -207,7 +207,7 @@ print("Cadena decodificada:", texto_decodificado)
 
 #### Escribe una función que compare dos cadenas sumando el valor ASCII de cada carácter y devuelva cuál tiene un mayor valor total. Para este ejercicio ten en cuenta que la función integrada ord() devuelve el valor ASCII de un carácter
 
-```python`
+```python
 texto1 = input("Escribe la primera cadena: ")
 def comparar_cadenas_ascii(cadena1, cadena2):
     suma1 = sum(ord(c) for c in cadena1)
@@ -248,7 +248,6 @@ else:
 ```
 
 #### Escribe una función que tome un número de forma de cadena y le agregue separadores de miles
-
 
 ```python
 def poner_puntos(cadena):

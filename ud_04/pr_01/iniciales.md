@@ -361,8 +361,7 @@ print(f"{num} {origen} equivalen a {resultado:.2f} {destino}")
 
 ``
 
-### Crea un programa que genere una contraseña aleatoria de una longitud que indique el usuario. La contraseña debe incluir letras 
-mayúsculas, minúsculas, números y símbolos especiales
+### Crea un programa que genere una contraseña aleatoria de una longitud que indique el usuario. La contraseña debe incluir letras mayúsculas, minúsculas, números y símbolos especiales
 
 ```Python
 
