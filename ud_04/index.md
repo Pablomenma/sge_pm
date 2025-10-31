@@ -4,4 +4,4 @@
 
 1. [Ejercicios iniciales](./pr_01/iniciales.md)
 2. [Ejercicios cadenas](./pr_02/cadenas.md)
-3. Ejercicios listas](./pr_03/listas.md)
+3. [Ejercicios listas](./pr_03/listas.md)

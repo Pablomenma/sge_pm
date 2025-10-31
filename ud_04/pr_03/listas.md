@@ -1,6 +1,8 @@
-# hola
+# PRÁCTICAS SISTEMAS DE GESTIÓN EMPRESARIAL. PABLO MENDOZA MAYO
 
-## Ejercicios Python : listas
+## Unidad 04: Python
+
+### listas en Python pr3
 
 ### Ordenando elementos: Mostrar los nombres ordenados alfabéticamente en orden inverso
 
