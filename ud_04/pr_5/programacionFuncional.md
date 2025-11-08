@@ -205,3 +205,21 @@ palabras = ["HOLA", "MUNDO", "SOL", "CIELO", "mar"]
 
 
 ```
+
+###Dadas dos listas de caracteres, usa reduce para concatenarlas en una sola lista sin utilizar + o métodos de concatenación.
+
+```python
+from functools import reduce
+lista1 = ['a', 'b', 'c']
+lista2 = ['x', 'y', 'z']
+
+
+def agregar(acc, val):
+    acc.append(val)
+    return acc
+
+resultado = reduce(agregar, lista2, lista1.copy())
+
+print(resultado)
+
+```
