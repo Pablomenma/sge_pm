@@ -124,49 +124,84 @@ print(Frecuencia_palabra(texto))
 ```
 
 
-8.- Intersección de conjuntos
+### Intersección de conjuntos
 Dadas dos listas de números, usa filter para obtener una lista de los elementos que están en ambas listas (sin usar conjuntos).
 
-# Ejemplo de listas de entrada
+```python
 lista1 = [1, 2, 3, 4, 5]
 lista2 = [3, 4, 5, 6, 7]
-# Resultado esperado: [3, 4, 5]
-9.- Agrupación de palabras por longitud
+
+def compartimos_numero(x):
+    return x in lista2
+
+resultado = list(filter(compartimos_numero, lista1))
+print(resultado)
+```
+
+###  Agrupación de palabras por longitud
 Dada una lista de palabras, crea un diccionario donde la clave es la longitud de la palabra y el valor es una lista de palabras de esa longitud. Usa map y filter.
 
-# Ejemplo de lista de entrada
+```python 
 palabras = ["sol", "luna", "estrella", "cielo", "mar"]
-# Resultado esperado: {3: ['sol', 'mar'], 4: ['luna', 'cielo'], 8: ['estrella']}
+longitudes = list(map(len, palabras))
+longitudes_unicas = []
+for l in longitudes:
+    if l not in longitudes_unicas:
+        longitudes_unicas.append(l)
+
+
+resultado = { 
+    longitud: list(filter(lambda palabra: len(palabra) == longitud, palabras))
+    for longitud in longitudes_unicas
+}
+
+print(resultado)
+
+```
+
+
 10.- Concatenación de listas de caracteres
 Dadas dos listas de caracteres, usa reduce para concatenarlas en una sola lista sin utilizar + o métodos de concatenación.
 
-# Ejemplo de listas de entrada
+```python
 lista1 = ['a', 'b', 'c']
 lista2 = ['x', 'y', 'z']
 # Resultado esperado: ['a', 'b', 'c', 'x', 'y', 'z']
-11.- Calificación de alumnos
+```
+
+### Calificación de alumnos
 Dada una lista de tuplas con el nombre del alumno y su calificación, utiliza map y filter para obtener una lista con los nombres de los alumnos que han aprobado (nota >= 5).
 
-# Ejemplo de lista de entrada
+```python
+
 alumnos = [("Ana", 4), ("Bruno", 7), ("Clara", 5), ("David", 8)]
-# Resultado esperado: ['Bruno', 'Clara', 'David']
-12.- Calcular producto cartesiano
-Dadas dos listas de números, usa map para obtener el producto cartesiano de ambas listas, devolviendo una lista de tuplas.
+aprobados = filter(lambda alumno: alumno[1] >= 5, alumnos)
 
-# Ejemplo de listas de entrada
-lista1 = [1, 2]
-lista2 = [3, 4]
-# Resultado esperado: [(1, 3), (1, 4), (2, 3), (2, 4)]
-13.- Pipe de transformaciones de listas
-Implementa una función que tome una lista de funciones y una lista de números, y aplique cada función de la lista en secuencia sobre la lista de números usando reduce.
+nom_aprobado = list(map(lambda alumno: alumno[0], aprobados))
 
-# Ejemplo de funciones y lista de entrada
-funciones = [lambda x: x*2, lambda x: x+3, lambda x: x-1]
-numeros = [1, 2, 3]
-# Resultado esperado: [((1*2)+3)-1, ((2*2)+3)-1, ((3*2)+3)-1] -> [4, 6, 8]
-14.- Aplicar operaciones de cadena
+```
+
+
+
+### Aplicar operaciones de cadena
 Dada una lista de cadenas, usa map y filter para crear una nueva lista con las cadenas que tengan más de tres letras y en las que todas las letras sean mayúsculas. Además, convierte el primer carácter en minúscula.
 
-# Ejemplo de lista de entrada
+
+```python
 palabras = ["HOLA", "MUNDO", "SOL", "CIELO", "mar"]
+def mas_de_tres(x):
+    return len(x)> 5
+
+def mayusculas (x):
+
+    return x[0].lower() + x[1:].upper()
+
+
+cinco_letras = list( filter(mas_de_tres, palabras) )
+Alteradas = list(map(mayusculas, cinco_letras ))
+print(Alteradas)
 # Resultado esperado: ['hOLA', 'mUNDO', 'cIELO']
+palabras = ["HOLA", "MUNDO", "SOL", "CIELO", "mar"]
+
+
+```
