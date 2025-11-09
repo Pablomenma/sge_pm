@@ -155,3 +155,132 @@ def combinar_diccionarios(dic1, dic2):
 resultado = combinar_diccionarios(productos1, productos2)
 print(resultado)  
 ```
+
+### Escribe un programa que tome una frase y use un diccionario para contar la frecuencia de cada palabra.
+
+```python
+frase = input("introduce una frase ")
+
+repeticiones = {}
+palabras = frase.split()
+
+for palabra in palabras:
+    if palabra in repeticiones:
+        repeticiones[palabra] += 1
+    else:
+        repeticiones[palabra] = 1
+
+print("Frecuencia de palabras:")
+for palabra, cantidad in repeticiones.items():
+    print(palabra, ":", cantidad)
+
+```
+
+
+
+### Escribe una función que tome un diccionario y devuelva otro con las claves y valores intercambiados (lo que antes eran valores ahora son claves, y viceversa).
+
+```python
+original = {"python": 1, "java": 2, "angular": 3}
+def invertir_diccionario(diccionario):
+    invertido = {}
+    for clave, valor in diccionario.items():
+        invertido[valor] = clave
+    return invertido
+
+resultado = invertir_diccionario(original)
+print(resultado)
+```
+
+
+#### Dado un diccionario de empleados y salarios, filtra e imprime solo los empleados con un salario mayor a un umbral definido.
+
+```python`
+empleados = {"Bruno": 1200," Carlos": 1500, "Olga": 1300, "Pedro": 1400}
+umbral = int(input("establece un limite"))
+def supera_umbral(umbral):
+    for empleado, salario in empleados.items():
+        if salario > umbral:
+            return empleado, ":", salario
+        
+        print(supera_umbral(umbral))
+```
+
+### Partiendo de un diccionario donde las claves son nombres de departamentos y los valores, diccionarios de empleados y sus puestos, tal como se ve en el código de ejemplo, crea un programa que permita realizar las siguientes funciones:
+
+```python 
+
+#Mostrar el listado de todos los empleados de un departamento
+#Añadir un empleado a un departamento
+#Eliminar un empleado de un departamento
+departamentos = {
+    "Recursos Humanos": {
+        "Ana": "Gerente de Recursos Humanos",
+        "Luis": "Especialista en Reclutamiento",
+        "Elena": "Asistente de Recursos Humanos"
+    },
+    "Tecnología": {
+        "Carlos": "Desarrollador Backend",
+        "María": "Desarrolladora Frontend",
+        "Pedro": "Administrador de Sistemas"
+    },
+    "Marketing": {
+        "Sofía": "Directora de Marketing",
+        "Jorge": "Especialista en SEO",
+        "Laura": "Community Manager"
+    },
+    "Finanzas": {
+        "Juan": "Analista Financiero",
+        "Lucía": "Contadora",
+        "Raúl": "Asesor Financiero"
+    }
+}
+
+while True:
+    print(" te doy estas opciones")
+    print("Mostrar empleados de un departamento")
+    print(" Añadir empleado a un departamento")
+    print(" Eliminar empleado de un departamento")
+    print(" Salir")
+
+
+    departamento = input("Introduce el nombre del departamento: ")
+    opcion = input("que quieres hacer: ")
+    if opcion == "mostrar":
+        if departamento in departamentos:
+            print(f"\nEmpleados en {departamento}:")
+            for empleado, puesto in departamentos[departamento].items():
+                print(f"- {empleado}: {puesto}")
+        else:
+            print("Departamento no encontrado")
+
+    elif opcion == "añadir":
+        departamento = input("Introduce el departamento donde agregar el empleado: ")
+        if departamento in departamentos:
+            nombre = input("Nombre del empleado: ")
+            puesto = input("Puesto del empleado: ")
+            departamentos[departamento][nombre] = puesto
+            print(f"Empleado {nombre} añadido a {departamento}.")
+        else:
+            print("Departamento no encontrado")
+
+    elif opcion == "eliminar":
+        departamento = input("Introduce el departamento: ")
+        if departamento in departamentos:
+            nombre = input("Empleado a eliminar: ")
+            if nombre in departamentos[departamento]:
+                del departamentos[departamento][nombre]
+                print(f"Empleado {nombre} eliminado de {departamento}.")
+            else:
+                print("El empleado no existe en ese departamento")
+        else:
+            print("Departamento no encontrado")
+
+    elif opcion == "4":
+        print("Saliendo del programa...")
+        break
+
+    else:
+        print("Opción no válida")
+````
+
