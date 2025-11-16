@@ -45,7 +45,7 @@ services:
     volumes:
       - ~/OdooDev/dataDev:/var/lib/postgresql/data
 
-  postgres_2:
+  postgres_B:
     image: postgres:14
     container_name: dbProduccion
     environment:
