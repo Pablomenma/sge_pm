@@ -1,0 +1,346 @@
+GUÍA PASO A PASO PARA CREAR UN MÓDULO EN ODOO
+============================================
+
+ÍNDICE
+------
+1. Requisitos previos
+2. Estructura básica de un módulo
+3. Crear la carpeta del módulo
+4. Crear el archivo __manifest__.py
+5. Crear el archivo __init__.py
+6. Crear modelos (models)
+7. Crear vistas (views)
+8. Reglas de seguridad (security)
+9. Cargar datos iniciales (data opcional)
+10. Instalar el módulo en Odoo
+11. Consejos finales
+
+
+1. REQUISITOS PREVIOS
+---------------------
+Antes de empezar, asegúrate de tener:
+
+- Python instalado.
+- Odoo instalado y funcionando (cualquier versión reciente: 14, 15, 16, etc.).
+- Acceso a la carpeta de addons personalizados (por ejemplo: /odoo/custom/addons).
+- Un editor de código (VSCode, PyCharm, etc.).
+- Conocimientos básicos de:
+  - Python (clases, métodos).
+  - XML (para las vistas).
+  - Cómo iniciar el servidor de Odoo desde la terminal.
+
+También es importante saber en qué carpeta estás añadiendo tu módulo.
+Normalmente será algo como:
+
+  /odoo/custom/addons/
+
+Ahí es donde vas a crear la carpeta de tu nuevo módulo.
+
+
+2. ESTRUCTURA BÁSICA DE UN MÓDULO
+---------------------------------
+La estructura mínima de un módulo de Odoo suele ser:
+
+nombre_modulo/
+  ├── __init__.py
+  ├── __manifest__.py
+  ├── models/
+  │     ├── __init__.py
+  │     └── ejemplo_modelo.py
+  ├── views/
+  │     └── ejemplo_vista.xml
+  └── security/
+        ├── ir.model.access.csv
+        └── (opcional) seguridad_record_rules.xml
+
+Puedes añadir más carpetas según lo que necesites:
+- data/
+- static/
+- report/
+- wizard/
+etc.
+
+
+3. CREAR LA CAPETA DEL MÓDULO
+------------------------------
+1) Ve a la carpeta de addons personalizados de tu Odoo.
+   Ejemplo en Linux:
+     cd /odoo/custom/addons
+
+2) Crea una carpeta con el nombre de tu módulo.
+   Ejemplo:
+     nombre_modulo = "mi_modulo_ejemplo"
+
+   Crea la carpeta:
+     mkdir mi_modulo_ejemplo
+
+3) Dentro de esa carpeta, crea subcarpetas básicas:
+     cd mi_modulo_ejemplo
+     mkdir models
+     mkdir views
+     mkdir security
+
+
+4. CREAR EL ARCHIVO __manifest__.py
+-----------------------------------
+El archivo __manifest__.py describe el módulo: nombre, versión, dependencias, vistas, etc.
+
+1) En la carpeta raíz del módulo (`mi_modulo_ejemplo`), crea el archivo:
+     __manifest__.py
+
+2) Contenido de ejemplo:
+
+from odoo import __version__  # opcional, según versión de Odoo
+
+{
+    "name": "Mi Módulo Ejemplo",
+    "version": "16.0.1.0.0",           # ajusta según tu versión
+    "summary": "Un módulo de ejemplo para aprender.",
+    "description": "Módulo de ejemplo - Este módulo sirve como guía para aprender la estructura básica.",
+    "author": "Tu Nombre",
+    "website": "https://tusitio.com",
+    "category": "Tools",
+    "depends": ["base"],               # lista de módulos de los que depende
+    "data": [
+        "security/ir.model.access.csv",
+        "views/ejemplo_vista.xml",
+    ],
+    "installable": True,
+    "application": True,               # True si quieres que aparezca como app
+    "auto_install": False,
+}
+
+3) Ajusta la versión, el author y website a lo que necesites.
+
+IMPORTANTE:
+- En "depends" pon al menos "base" u otros módulos que uses (por ejemplo "sale", "account", etc.).
+- En "data" debes listar los archivos XML/CSV que se deben cargar al instalar el módulo.
+
+
+5. CREAR EL ARCHIVO __init__.py
+-------------------------------
+Este archivo indica a Python qué se debe cargar cuando Odoo inicializa el módulo.
+
+1) En la raíz del módulo (`mi_modulo_ejemplo`) crea el archivo:
+     __init__.py
+
+2) Contenido mínimo:
+
+from . import models
+
+3) Ahora, en la carpeta models, crea también un archivo:
+     models/__init__.py
+
+4) Contenido del models/__init__.py:
+
+from . import ejemplo_modelo
+
+Cada vez que crees un nuevo archivo Python en models/ tendrás que importarlo aquí.
+
+
+6. CREAR MODELOS (models)
+-------------------------
+Los modelos definen las tablas/estructuras de datos de tu módulo.
+
+1) En la carpeta models, crea el archivo:
+     ejemplo_modelo.py
+
+2) Contenido de ejemplo para un modelo simple de "tarea":
+
+from odoo import models, fields
+
+class MiTarea(models.Model):
+    _name = "mi_modulo_ejemplo.tarea"
+    _description = "Tarea de Ejemplo"
+
+    name = fields.Char(string="Nombre", required=True)
+    description = fields.Text(string="Descripción")
+    fecha_inicio = fields.Date(string="Fecha de inicio")
+    fecha_fin = fields.Date(string="Fecha de fin")
+    estado = fields.Selection([
+        ('pendiente', 'Pendiente'),
+        ('en_progreso', 'En progreso'),
+        ('hecho', 'Hecho'),
+    ], string="Estado", default='pendiente')
+
+Notas:
+- _name define el nombre técnico del modelo (tabla).
+- name suele ser el campo que se muestra como principal.
+- Puedes añadir más campos (Many2one, One2many, etc.) según tus necesidades.
+
+
+7. CREAR VISTAS (views)
+-----------------------
+Las vistas se definen en archivos XML. Suelen incluir:
+- tree (lista)
+- form (formulario)
+- menuitems (menús)
+- actions (acciones para abrir vistas)
+
+1) En la carpeta views, crea el archivo:
+     ejemplo_vista.xml
+
+2) Contenido de ejemplo:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Acción para abrir la vista -->
+    <record id="action_mi_tarea" model="ir.actions.act_window">
+        <field name="name">Tareas de Ejemplo</field>
+        <field name="res_model">mi_modulo_ejemplo.tarea</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menú principal -->
+    <menuitem id="menu_mi_modulo_root"
+              name="Mi Módulo Ejemplo"
+              sequence="10"/>
+
+    <!-- Submenú -->
+    <menuitem id="menu_mi_tarea"
+              name="Tareas"
+              parent="menu_mi_modulo_root"
+              action="action_mi_tarea"
+              sequence="10"/>
+
+    <!-- Vista tipo lista (tree) -->
+    <record id="view_mi_tarea_tree" model="ir.ui.view">
+        <field name="name">mi.tarea.tree</field>
+        <field name="model">mi_modulo_ejemplo.tarea</field>
+        <field name="arch" type="xml">
+            <tree string="Tareas">
+                <field name="name"/>
+                <field name="estado"/>
+                <field name="fecha_inicio"/>
+                <field name="fecha_fin"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Vista tipo formulario (form) -->
+    <record id="view_mi_tarea_form" model="ir.ui.view">
+        <field name="name">mi.tarea.form</field>
+        <field name="model">mi_modulo_ejemplo.tarea</field>
+        <field name="arch" type="xml">
+            <form string="Tarea">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="estado"/>
+                        <field name="fecha_inicio"/>
+                        <field name="fecha_fin"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
+
+3) Asegúrate de que el nombre de modelo en las vistas coincida EXACTAMENTE con el _name del modelo Python:
+   mi_modulo_ejemplo.tarea
+
+
+8. REGLAS DE SEGURIDAD (security)
+---------------------------------
+Debes definir quién puede leer/crear/editar/borrar los registros de tu modelo.
+
+1) En la carpeta security, crea el archivo:
+     ir.model.access.csv
+
+2) Contenido mínimo (nota: respeta las comas y no dejes espacios extra):
+
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mi_tarea_user,access_mi_tarea_user,model_mi_modulo_ejemplo_tarea,base.group_user,1,1,1,1
+
+Explicación rápida:
+- access_mi_tarea_user: ID único de la regla.
+- model_mi_modulo_ejemplo_tarea: referencia al modelo (Odoo la genera a partir de _name).
+- base.group_user: grupo de usuarios interno (usuarios internos de Odoo).
+- 1/0: permisos (read/write/create/unlink).
+
+3) Asegúrate de que el archivo ir.model.access.csv esté listado en el __manifest__.py dentro de "data".
+
+
+9. CARGAR DATOS INICIALES (OPCIONAL)
+------------------------------------
+Si quieres crear registros por defecto al instalar el módulo, puedes usar archivos XML o CSV extras.
+
+Ejemplo:
+1) Crea la carpeta data (si la necesitas):
+     mkdir data
+
+2) Crea un archivo, por ejemplo:
+     data/datos_iniciales.xml
+
+3) Contenido de ejemplo:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="mi_tarea_demo_1" model="mi_modulo_ejemplo.tarea">
+        <field name="name">Tarea de ejemplo inicial</field>
+        <field name="description">Creada automáticamente al instalar el módulo.</field>
+        <field name="estado">pendiente</field>
+    </record>
+</odoo>
+
+4) Añade este archivo a "data" en __manifest__.py:
+
+    "data": [
+        "security/ir.model.access.csv",
+        "views/ejemplo_vista.xml",
+        "data/datos_iniciales.xml",
+    ],
+
+
+10. INSTALAR EL MÓDULO EN ODOO
+------------------------------
+1) Asegúrate de que la ruta de tu carpeta de addons (donde está mi_modulo_ejemplo) está configurada en el archivo de configuración de Odoo
+   (opción addons_path).
+
+2) Reinicia el servicio de Odoo.
+   - Si lo ejecutas por comando, algo como:
+       odoo -c /ruta/a/odoo.conf
+     (o el comando que uses normalmente).
+
+3) Entra en Odoo con tu navegador.
+   - Normalmente: http://localhost:8069
+
+4) Ve a:
+   - Aplicaciones (Apps).
+   - Pulsa el botón para "Actualizar lista de aplicaciones" o "Actualizar".
+   - Busca "Mi Módulo Ejemplo" (o el nombre que pusiste en "name" del __manifest__.py).
+
+5) Instala el módulo.
+   - Si todo está bien, la instalación terminará sin errores.
+   - Si hay errores, revisa:
+     - La consola/terminal donde corre Odoo (los logs).
+     - Que los nombres de archivos en __manifest__.py estén bien escritos.
+     - Que los IDs en XML sean únicos.
+     - Que los modelos y campos existan y estén bien escritos.
+
+
+11. CONSEJOS FINALES
+--------------------
+- Siempre revisa los logs de Odoo cuando algo falla. Son tu mejor pista.
+- Usa nombres claros para IDs en XML y para los modelos.
+- Cada vez que cambias código Python (models), reinicia Odoo.
+- Para cambios en vistas XML, a veces basta con actualizar el módulo desde Apps (o usar "Actualiza" en el menú de desarrollador).
+- Activa el "Modo Desarrollador" en Odoo para ver opciones avanzadas:
+  - Depurar vistas.
+  - Ver nombre técnico de modelos, campos, vistas y menús.
+- Versiona tu código con git para tener historial de cambios.
+- Empieza con algo muy simple (un solo modelo, una vista) y ve complicándolo poco a poco.
+
+
+FIN DE LA GUÍA
+--------------
+Con estos pasos tienes la base para crear tu primer módulo en Odoo:
+1) Crear estructura de carpetas.
+2) Definir __manifest__.py.
+3) Crear models en Python.
+4) Crear vistas en XML.
+5) Definir permisos de seguridad.
+6) Instalar y probar en Odoo.
+
+Guarda este contenido como archivo .txt y úsalo como referencia cuando crees nuevos módulos.

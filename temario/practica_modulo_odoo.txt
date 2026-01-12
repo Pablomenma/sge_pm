@@ -1,0 +1,129 @@
+PRÁCTICA GUIADA: CREACIÓN DE UN MÓDULO EN ODOO Asignatura: Sistemas de
+Gestión Empresarial Unidad: UT05 – Desarrollo de Componentes
+
+OBJETIVO DE LA PRÁCTICA El objetivo de esta práctica es que el alumnado
+sea capaz de crear e instalar un módulo básico en Odoo utilizando las
+herramientas de desarrollo adecuadas, comprendiendo la estructura, el
+modelo de datos y las vistas.
+
+  ----------------------------
+  1. PREPARACIÓN DEL ENTORNO
+  ----------------------------
+
+1.1. Abrir Visual Studio Code Abre Visual Studio Code en tu ordenador.
+
+1.2. Abrir el directorio de trabajo Ve a: File → Open Folder Selecciona
+la carpeta donde se encuentra tu entorno de Odoo (por ejemplo:
+odooDesarrollo).
+
+1.3. Extensiones recomendadas Comprueba que tienes instaladas: - Odoo
+Snippets - Auto Close Tag - Material Icon Theme (opcional) - Remote SSH
+(si trabajas con máquina virtual)
+
+  ------------------------------------------
+  2. ACTIVAR EL MODO DESARROLLADOR EN ODOO
+  ------------------------------------------
+
+Desde el navegador accede a: http://localhost:8069
+
+Ve a: Ajustes → Opciones generales → Activar modo desarrollador
+
+O bien usa: Ctrl + K y busca “Activar modo de depuración”.
+
+  -------------------------------------
+  3. CREACIÓN DEL MÓDULO CON SCAFFOLD
+  -------------------------------------
+
+3.1. Acceder al contenedor de Odoo Desde la terminal:
+
+docker exec -ti nombre_contenedor bash
+
+3.2. Crear el módulo Ejecuta:
+
+odoo scaffold lista_tareas /mnt/extra-addons
+
+Sal del contenedor con: exit
+
+  --------------------------
+  4. ESTRUCTURA DEL MÓDULO
+  --------------------------
+
+Dentro de la carpeta lista_tareas deben aparecer estos archivos:
+
+-   manifest.py
+-   init.py
+-   models/models.py
+-   views/views.xml
+-   demo/demo.xml
+-   controllers/controllers.py
+
+  ------------------------------------------
+  5. CONFIGURACIÓN DEL ARCHIVO MANIFEST.PY
+  ------------------------------------------
+
+Abre el archivo manifest.py y modifica los campos principales:
+
+-   name
+-   description
+-   author
+-   version
+-   category
+-   depends
+-   data
+
+Guarda los cambios.
+
+  ---------------------------------
+  6. CREACIÓN DEL MODELO DE DATOS
+  ---------------------------------
+
+Abre el archivo: models/models.py
+
+Define una clase que herede de models.Model, por ejemplo:
+
+-   Nombre del modelo
+-   Campos: nombre, descripción, prioridad, urgente
+
+El campo “urgente” será un campo calculado.
+
+  ---------------------------
+  7. CREACIÓN DE LAS VISTAS
+  ---------------------------
+
+Abre: views/views.xml
+
+Crea:
+
+-   Vista tipo tree (lista)
+-   Vista tipo form (formulario)
+-   Acción de ventana
+-   Menús
+
+  -----------------------------
+  8. ACTUALIZACIÓN DEL MÓDULO
+  -----------------------------
+
+Desde Odoo: - Ve a Aplicaciones - Pulsa en “Actualizar lista de
+aplicaciones” - Busca el módulo lista_tareas - Instálalo
+
+  --------------------
+  9. RESULTADO FINAL
+  --------------------
+
+Comprueba que: - El módulo aparece en el menú - Puedes crear tareas - El
+campo urgente se calcula automáticamente
+
+  ------------------------
+  10. CUESTIONES FINALES
+  ------------------------
+
+Responde:
+
+1.  ¿Qué función tiene el archivo manifest.py?
+2.  ¿Qué diferencia hay entre una vista tree y una vista form?
+3.  ¿Qué es un campo calculado?
+4.  ¿Por qué es importante seguir las normas de nomenclatura?
+
+  --------------------
+  FIN DE LA PRÁCTICA
+  --------------------

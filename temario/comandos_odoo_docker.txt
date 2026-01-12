@@ -1,0 +1,17 @@
+
+wsl --install - Instala Windows Subsystem for Linux para usar Docker en Windows
+docker version - Muestra la versión instalada de Docker
+docker ps - Lista contenedores en ejecución
+docker ps -a - Lista todos los contenedores, incluso detenidos
+docker stop <nombre> - Detiene un contenedor
+docker start <nombre> - Inicia un contenedor detenido
+docker images - Lista las imágenes descargadas en Docker
+docker pull <imagen> - Descarga una imagen desde Docker Hub
+docker run <opciones> <imagen> - Ejecuta un contenedor
+docker stop <id> - Detiene un contenedor
+docker start <id> - Inicia un contenedor detenido
+docker compose up - Crea y levanta contenedores definidos en docker-compose.yaml
+docker compose up -d - Levanta contenedores en segundo plano
+docker compose down - Apaga y elimina contenedores creados con compose
+docker compose stop - Detiene contenedores sin eliminarlos
+docker compose restart - Reinicia los contenedores
